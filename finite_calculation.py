@@ -15,18 +15,18 @@ class FieldElement:
         if other is None:
             return False
         return self.num == other.num and self.prime == other.prime  # <3>
-    # end::source1[]
+    
 
     def __ne__(self, other):
         return not (self == other)
 
-    # tag::source2[]
+    
     def __add__(self, other):
         if self.prime != other.prime:  # <1>
             raise TypeError('Cannot add two numbers in different Fields')
         num = (self.num + other.num) % self.prime  # <2>
         return self.__class__(num, self.prime)  # <3>
-    # end::source2[]
+    
 
     def __sub__(self, other):
         if self.prime != other.prime:
@@ -46,12 +46,12 @@ class FieldElement:
         # we return an element of the same class
         return self.__class__(num, self.prime)
 
-    # tag::source3[]
+    
     def __pow__(self, exponent):
         n = exponent % (self.prime - 1)  # <1>
         num = pow(self.num, n, self.prime)
         return self.__class__(num, self.prime)
-    # end::source3[]
+    
 
     def __truediv__(self, other):
         if self.prime != other.prime:
